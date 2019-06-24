@@ -1,0 +1,18 @@
+
+Pavilion@DESKTOP-F7O1U1B MINGW64 ~/Documents/MyLaravelProjects/Introproject (master)
+$ php artisan make:seeder ArticlesTableSeeder
+Seeder created successfully.
+
+Pavilion@DESKTOP-F7O1U1B MINGW64 ~/Documents/MyLaravelProjects/Introproject (master)
+$ php artisan make:factory ArticleFactory
+Factory created successfully.
+
+Pavilion@DESKTOP-F7O1U1B MINGW64 ~/Documents/MyLaravelProjects/Introproject (master)
+$ php artisan migrate
+Migrating: 2019_06_20_121704_create_articles_table
+Migrated:  2019_06_20_121704_create_articles_table
+
+Pavilion@DESKTOP-F7O1U1B MINGW64 ~/Documents/MyLaravelProjects/Introproject (master)
+$ php artisan db:seed
+Seeding: ArticlesTableSeeder
+Database seeding completed successfully.
