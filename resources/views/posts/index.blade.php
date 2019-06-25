@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.App')
 <!-- Example row of columns -->
 
 @section('content')
