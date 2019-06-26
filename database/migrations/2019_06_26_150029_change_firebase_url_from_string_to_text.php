@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCoverImageToPost extends Migration
+class ChangeFirebaseUrlFromStringToText extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,7 @@ class AddCoverImageToPost extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->string('cover_image');
-            
-           
+            $table->text('firebase_url')->change();
         });
     }
 
@@ -30,7 +28,7 @@ class AddCoverImageToPost extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->dropColumn('cover_image');
+            $table->string('firebase_url')->change();
         });
     }
 }

@@ -6,7 +6,8 @@
 
 <div class="mt-4">
 
-         <img src="/storage/cover_images/{{$posts->cover_image}}" alt="No image" style="width:100%">
+         {{-- <img src="/storage/cover_images/{{$posts->cover_image}}" alt="No image" style="width:100%"> --}}
+         <img src="{{$posts->firebase_url}}" alt="No image" style="width:100%">
          <br>
          <br>
 

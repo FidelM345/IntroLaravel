@@ -19,7 +19,6 @@
 
                     </div> 
                  
-
                     You are logged in!
                 </div>
                    
@@ -71,8 +70,6 @@
                       @endif
 
             
-                    
-               
 
               
             </div>

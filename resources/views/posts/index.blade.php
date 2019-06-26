@@ -18,7 +18,7 @@
 
                                  <div class="col-md-4">
 
-                                       <img src="/storage/cover_images/{{$item->cover_image}}" alt="No image" style="width:100%">
+                                       <img src="{{$item->firebase_url}}" alt="No image" style="width:100%">
          
                                     </div>
          

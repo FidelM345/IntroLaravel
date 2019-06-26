@@ -62,45 +62,84 @@ class PostsController extends Controller
     {
         //
 
+
+        
+        // // validate incoming request
+        
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'required|email|unique:users',
+        //     'name' => 'required|string|max:50',
+        //     'password' => 'required'
+        // ]);
+         
+        // if ($validator->fails()) {
+        //      Session::flash('error', $validator->messages()->first());
+        //      return redirect()->back()->withInput();
+        // }
+
+
+
+
+
         $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'cover_image' => 'image|nullable|max:1999',
+            //'cover_image' => 'image|nullable|max:1999',
+            'firebase_url'=>'nullable'
         ]);
+
+       
+        //dd($request->all());
+       // dd($request);
 
         //handle file uploads
 
-        if($request->hasFile('cover_image')){
+        // if($request->hasFile('cover_image')){
 
-            //Get  file name with extension
-            $fileNameWithExt=$request->file('cover_image')->getClientOriginalName();
+        //     //Get  file name with extension
+        //     $fileNameWithExt=$request->file('cover_image')->getClientOriginalName();
 
-            //Get just fileName
-            $fileName=pathinfo( $fileNameWithExt,PATHINFO_FILENAME);//NORMAL PHP CODE
+        //     //Get just fileName
+        //     $fileName=pathinfo( $fileNameWithExt,PATHINFO_FILENAME);//NORMAL PHP CODE
 
 
-            //Get just Extension
-            $extension=$request->file('cover_image')->getClientOriginalExtension();
+        //     //Get just Extension
+        //     $extension=$request->file('cover_image')->getClientOriginalExtension();
             
-            $fileNameToStore=$fileName.'_'.time().'.'.$extension; //ensures the images do not overide each other when uploading files
+        //     $fileNameToStore=$fileName.'_'.time().'.'.$extension; //ensures the images do not overide each other when uploading files
 
-            //upload image
-            $path=$request->file('cover_image')->storeAs('public/cover_images',$fileNameToStore);
-
-
-         }else{
-
-           $fileNameToStore='noimage.jpg';
-        }
+        //     //upload image
+        //     $path=$request->file('cover_image')->storeAs('public/cover_images',$fileNameToStore);
 
 
+        //  }else{
 
+        //    $fileNameToStore='noimage.jpg';
+        // }
 
+        if( $request->filled('firebase_url')){//checks whether the field is empty or not
+
+        $firebaseURL=$request->firebase_url;
+
+        }else{
+
+         $firebaseURL='https://firebasestorage.googleapis.com/v0/b/myprojo-be85d.appspot.com/o/laravel_images%2Fno-image-found.png?alt=media&token=43448233-0e61-4ec5-9586-4304c2281223';
+    
+         }
+
+          
+
+       //  dd( $firebaseURL);
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;//takes the id of the currently logged in user
-        $post->cover_image = $fileNameToStore;
+        $post->firebase_url=$firebaseURL;
+
+        
+
+
+      //$post->cover_image = $fileNameToStore;
 
         $post->save();
 
@@ -123,9 +162,9 @@ class PostsController extends Controller
  
        // return $post;
        
-        // return view('posts.show')->with('posts',$post);
+         return view('posts.show')->with('posts',$post);
 
-         return $post;
+       //  return $post;
     }
 
 
@@ -163,12 +202,36 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $post = Post::find($id);
 
-        $post->title = $request->title;
-        $post->body = $request->body;
+        if( $request->filled('firebase_url')){//checks whether the field is empty or not
 
-        $post->save();
+           
+            $post = Post::find($id);
+
+            $post->firebase_url = $request->firebase_url;
+            $post->title = $request->title;
+            $post->body = $request->body;
+
+            $post->save();
+
+
+    
+            }else{
+
+            $post = Post::find($id);
+
+            $post->title = $request->title;
+            $post->body = $request->body;
+
+            $post->save();
+
+           
+             }
+
+
+
+
+        
 
         return Redirect::action('PostsController@index')->with('success','Data has been updated successfully');
 
