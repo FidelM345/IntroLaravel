@@ -32,6 +32,8 @@ class PostsController extends Controller
 
      //including pagination in laravel
        $post= Post::orderBy('created_at', 'desc')->paginate(4);
+
+
        //dump( $post);
 
        // return $post;

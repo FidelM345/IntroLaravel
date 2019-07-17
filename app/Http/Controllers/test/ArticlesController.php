@@ -32,15 +32,12 @@ class ArticlesController extends Controller
 
     {
 
-
         // $queryBuilder = new QueryBuilder(new Article, $request);
     
         // return response()->json([
         //       'data' => $queryBuilder->build()->paginate(),
     
         // ]);
-
-
 
         try {
 
@@ -49,7 +46,6 @@ class ArticlesController extends Controller
 
         //Returns collection of articles as resource
         return ArticleResource::collection($articles);
-
 
         } catch (\Throwable $th) {
             return response([

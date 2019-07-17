@@ -105,13 +105,15 @@
              // what happened
              console.log('file upload event', e);
        
+
+
              // get file
              var file = e.target.files[0];
-                   var date=new Date();//assigns different timestamps to uploaded files
+             var date=new Date();//assigns different timestamps to uploaded files
        
              // create a storage ref
              var storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}_${date}`);
-       
+      
              // upload file
              var uploadTask = storageRef.put(file);
        
@@ -153,13 +155,14 @@
                }, function () {
                  // Upload completed successfully, now we can get the download URL
                  // save this link somewhere, e.g. put it in an input field
-                           swal("Good job!", "Image saved successfully", "success");
-                 var downloadURL = uploadTask.snapshot.downloadURL;
-
+                  swal("Good job!", "Image saved successfully", "success");
+                  var downloadURL = uploadTask.snapshot.downloadURL;
                   var element = document.getElementById("firebase_url");
                   element.value = downloadURL;
                   element.forms.submit();
-                 console.log('downloadURL', downloadURL);
+                  console.log('downloadURL', downloadURL);
+
+
                });
        
            });
